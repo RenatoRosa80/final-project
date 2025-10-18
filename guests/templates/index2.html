@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+</head>
+<body>
+    <h1>Bem vindos ao meu Projeto Final</h1>
+    <form action = "{% url 'salvar' %}" method = "POST">
+        {% csrf_token %}
+        <label>Informe o Nome:</label>
+        <input type="text" name="nome">
+        <br>
+        <label>Informe a Data de Nascimento:</label>
+        <input type="text" name="nascimento">
+        <br>
+        <label>Informe o Email:</label>
+        <input type="text" name="email">
+        <br>
+        <label>Informe o Telefone:</label>
+        <input type="text" name="telefone">
+        <br>
+        <label>Informe a quantidade de convidados:</label>
+        <input type="text" name="convidados">
+        <br>
+        <label>Informe o Horário:</label>
+        <input type="text" name="horario">
+        <br>
+        <label>Solicitção Especial:</label>
+        <input type="text" name="solicitacao_especial">
+        <br>
+        <button type="submit">SALVAR</button>
+    </form>
+    <ul>
+    {% for pessoa in pessoas %}
+        <li>
+            {{ pessoa.nome }} - {{ pessoa.nascimento }} - {{ pessoa.email }} - {{ pessoa.telefone }} - {{ pessoa.convidados }} - {{ pessoa.horario }} - {{ pessoa.solicitacao_especial }}
+            <a href="{% url 'edite' pessoa.id %}">EDITAR</a>
+            <a href="{% url 'delete' pessoa.id %}">APAGAR</a>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

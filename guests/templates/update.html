@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action = "{% url 'update' pessoa.id %}" method = "POST">
+        {% csrf_token %}
+        <input type = "text" name = "nome" value = "{{pessoa.nome}}">
+        <br><br>
+        <input type = "text" name = "idade" value = "{{pessoa.idade}}">
+        <br><br>
+        <button type = "submit">SALVAR</button>
+    </form>
+</body>
+</html>

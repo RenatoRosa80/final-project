@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editar Mesa {{ mesa.numero }} - Sistema de Reservas{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card.bg-dark {
+        background: #f9eaea !important;
+        border: 1px solid #979090;
+    }
+
+    .form-control,
+    .form-select {
+        background: #e7e4e4 !important;
+        color: #131313 !important;
+        border: 1px solid #e2a5a5;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        background: #f08282 !important;
+        color: #f5f5f5 !important;
+        border-color: #ffc107;
+        box-shadow: 0 0 0 0.2rem rgba(14, 14, 14, 0.25);
+    }
+
+    .form-select {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+    }
+
+    body {
+        background: #a86d6d;
+        color: #f5f5f5;
+        min-height: 100vh;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1><i class="bi bi-pencil me-2"></i>Editar Mesa {{ mesa.numero }}</h1>
+                <a href="{% url 'gerenciar_mesas' %}" class="btn btn-outline-light">
+                    <i class="bi bi-arrow-left me-2"></i>Voltar
+                </a>
+            </div>
+
+            <!-- Mensagens -->
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Exibir erros do formulário -->
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Erro!</strong> Por favor, corrija os erros abaixo.
+                            {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                            <div>{{ error }}</div>
+                            {% endfor %}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <label for="id_numero" class="form-label">Número da Mesa:</label>
+                            <input type="text" name="numero" value="{{ form.numero.value|default:'' }}"
+                                class="form-control" id="id_numero" required>
+                            {% if form.numero.errors %}
+                            <div class="text-warning">{{ form.numero.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_capacidade" class="form-label">Capacidade:</label>
+                            <input type="number" name="capacidade" value="{{ form.capacidade.value|default:'' }}"
+                                class="form-control" id="id_capacidade" required>
+                            {% if form.capacidade.errors %}
+                            <div class="text-warning">{{ form.capacidade.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_status" class="form-label">Status:</label>
+                            {{ form.status }}
+                            {% if form.status.errors %}
+                            <div class="text-warning">{{ form.status.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_localizacao" class="form-label">Localização:</label>
+                            <input type="text" name="localizacao" value="{{ form.localizacao.value|default:'' }}"
+                                class="form-control" id="id_localizacao">
+                            {% if form.localizacao.errors %}
+                            <div class="text-warning">{{ form.localizacao.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_observacoes" class="form-label">Observações:</label>
+                            <textarea name="observacoes" class="form-control" id="id_observacoes"
+                                rows="3">{{ form.observacoes.value|default:'' }}</textarea>
+                            {% if form.observacoes.errors %}
+                            <div class="text-warning">{{ form.observacoes.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-warning">
+                                <i class="bi bi-save me-2"></i>Atualizar Mesa
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

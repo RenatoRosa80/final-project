@@ -1,39 +1,112 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Platia Bootstrap Template</title>
+  <title>Index - Bootstrap Templates</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{% static 'img/favicon.png' %}" rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
-  <!-- Fonts -->
+  <!-- Fontes -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
+    rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <!-- Vendor CSS Arquivos -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <!-- Pagina principal CSS -->
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Platia
-  * Template URL: https://bootstrapmade.com/platia-bootstrap-restaurant-template/
-  * Updated: Aug 11 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <style>
+    html:not(.no-js) [data-aos^=fade][data-aos^=fade].aos-animate {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+
+    [data-aos][data-aos][data-aos-delay="200"].aos-animate,
+    body[data-aos-delay="200"] [data-aos].aos-animate {
+      transition-delay: .2s;
+    }
+
+    body[data-aos-easing=ease-in-out] [data-aos] {
+      transition-timing-function:
+        ease-in-out;
+    }
+
+    [data-aos][data-aos][data-aos-duration="600"],
+    body[data-aos-duration="600"] [data-aos] {
+      transition-duration: .6s;
+    }
+
+    .hero .booking-card {
+      background: color-mix(in srgb, var(--surface-color), transparent 70%);
+      border: 1px solid color-mix(in srgb, var(--contrast-color), transparent 90%);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    [data-aos].aos-animate {
+      pointer-events: auto;
+    }
+
+    [data-aos] {
+      pointer-events: none;
+    }
+
+    *,
+    ::after,
+    ::before {
+      box-sizing: border-box;
+    }
+
+    user agent stylesheet div {
+      display: block;
+      unicode-bidi: isolate;
+    }
+
+    .row {
+      --bs-gutter-x: 1.5rem;
+      --bs-gutter-y: 0;
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: calc(-1 * var(--bs-gutter-y));
+      margin-right: calc(-.5 * var(--bs-gutter-x));
+      margin-left: calc(-.5 * var(--bs-gutter-x));
+    }
+
+    #container,
+    .container-fluid,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+      --bs-gutter-x: 1.5rem;
+      --bs-gutter-y: 0;
+      width: 100%;
+      padding-right: calc(var(--bs-gutter-x) * .5);
+      padding-left: calc(var(--bs-gutter-x) * .5);
+      margin-right: auto;
+      margin-left: auto;
+    }
+  </style>
+
 </head>
 
 <body class="index-page">
@@ -43,25 +116,26 @@
     <div class="topbar d-flex align-items-center dark-background">
       <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+          <i class="bi bi-envelope d-flex align-items-center"><a
+              href="mailto:contact@example.com">renatto.rfilho@yahoo.com</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+55 21973969501</span></i>
         </div>
         <div class="social-links d-none d-md-flex align-items-center">
           <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
           <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
           <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.linkedin.com/in/renato-rosa-santos-filho-44555891" class="linkedin"><i
+              class="bi bi-linkedin"></i></a>
         </div>
       </div>
-    </div><!-- End Top Bar -->
+    </div><!-- Fim do Cabecalho -->
 
     <div class="branding d-flex align-items-cente">
 
       <div class="container position-relative d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.webp" alt=""> -->
-          <h1 class="sitename">Platia</h1>
+
+          <h1 class="sitename">Shiraz Kitchen & Wine Restaurant</h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
@@ -72,10 +146,12 @@
             <li><a href="#book-a-table">Book a Table</a></li>
             <li><a href="#chefs">Chefs</a></li>
             <li><a href="#events">Events</a></li>
-            <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <!--<li class="dropdown"><a href="#"><span>Dropdown</span> <i
+                  class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
                 <li><a href="#">Dropdown 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
+                      class="bi bi-chevron-down toggle-dropdown"></i></a>
                   <ul>
                     <li><a href="#">Deep Dropdown 1</a></li>
                     <li><a href="#">Deep Dropdown 2</a></li>
@@ -88,7 +164,7 @@
                 <li><a href="#">Dropdown 3</a></li>
                 <li><a href="#">Dropdown 4</a></li>
               </ul>
-            </li>
+            </li>-->
             <li><a href="#contact">Contact</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -102,12 +178,12 @@
 
   <main class="main">
 
-    <!-- Hero Section -->
+    <!-- Texto principal de inicio da pagina -->
     <section id="hero" class="hero section dark-background">
 
       <div class="hero-background">
         <video autoplay="" muted="" loop="" playsinline="">
-          <source src="assets/img/restaurant/video-4.mp4" type="video/mp4">
+          <source src="{% static 'img/restaurant/video-4.mp4' %}" type="video/mp4">
         </video>
         <div class="overlay"></div>
       </div>
@@ -117,12 +193,14 @@
           <div class="col-lg-8">
             <div class="hero-text" data-aos="fade-up" data-aos-delay="100">
               <span class="tagline">Experience Culinary Excellence</span>
-              <h1 class="hero-title">Savor Every Moment at Platia</h1>
-              <p class="hero-description">Indulge in authentic Italian cuisine crafted with passion and the finest ingredients. From traditional recipes passed down through generations to innovative culinary creations, we offer an unforgettable dining experience.</p>
+              <h1 class="hero-title">Savor Every Moment at Shiraz Kitchen & Wine Restaurant</h1>
+              <p class="hero-description">Indulge in authentic Italian cuisine crafted with passion and the finest
+                ingredients. From traditional recipes passed down through generations to innovative culinary creations,
+                we offer an unforgettable dining experience.</p>
 
               <div class="hero-actions" data-aos="fade-up" data-aos-delay="200">
-                <a href="#" class="btn btn-primary">Book a Table</a>
-                <a href="#" class="btn btn-outline">View Menu</a>
+                <a href="#book-a-table" class="btn btn-primary">Book a Table</a>
+                <a href="#menu" class="btn btn-outline">View Menu</a>
               </div>
 
               <div class="hero-features" data-aos="fade-up" data-aos-delay="300">
@@ -144,77 +222,28 @@
                   <i class="bi bi-telephone"></i>
                   <div class="feature-text">
                     <span class="label">Reservations</span>
-                    <span class="value">+1 (312) 555-0198</span>
+                    <span class="value">+55 (21) 973969501</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="col-lg-4">
-            <div class="booking-card" data-aos="fade-left" data-aos-delay="200">
-              <h3>Make a Reservation</h3>
-              <form action="forms/book-a-table.php" method="post" class="php-email-form">
-                <div class="row gy-3">
-                  <div class="col-md-6">
-                    <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                  </div>
-                  <div class="col-md-6">
-                    <input type="email" name="email" class="form-control" placeholder="Your Email" required="">
-                  </div>
-                  <div class="col-md-6">
-                    <input type="tel" name="phone" class="form-control" placeholder="Your Phone" required="">
-                  </div>
-                  <div class="col-md-6">
-                    <select name="people" class="form-control" required="">
-                      <option value="">Guests</option>
-                      <option value="1">1 Person</option>
-                      <option value="2">2 People</option>
-                      <option value="3">3 People</option>
-                      <option value="4">4 People</option>
-                      <option value="5">5+ People</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <input type="date" name="date" class="form-control" required="">
-                  </div>
-                  <div class="col-md-6">
-                    <input type="time" name="time" class="form-control" required="">
-                  </div>
-                  <div class="col-12">
-                    <textarea name="message" class="form-control" rows="3" placeholder="Special requests or dietary restrictions"></textarea>
-                  </div>
-                  <div class="col-12">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your reservation request has been sent. We'll contact you shortly!</div>
-                    <button type="submit" class="btn btn-primary w-100">Reserve Now</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
         </div>
       </div>
 
-      <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="400">
-        <div class="scroll-text">Scroll to Explore</div>
-        <div class="scroll-arrow">
-          <i class="bi bi-chevron-down"></i>
-        </div>
-      </div>
 
-    </section><!-- /Hero Section -->
 
-    <!-- About Section -->
+    </section><!--Fim da secao principal -->
+
+    <!-- Secao Sobre -->
     <section id="about" class="about section">
 
-      <!-- Section Title -->
+      <!-- Titulo da Secao-->
       <div class="container section-title" data-aos="fade-up">
         <span class="description-title">&nbsp;About</span>
         <h2>About</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+      </div><!-- Fim da Secao Titulo-->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -222,8 +251,10 @@
           <div class="col-lg-6" data-aos="fade-up">
             <div class="about-content">
               <h2>Experience Our Unique Approach</h2>
-              <p class="fst-italic">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper.</p>
-              <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tempus porttitor.</p>
+              <p class="fst-italic">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id
+                ligula porta felis euismod semper.</p>
+              <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean eu leo quam. Pellentesque ornare
+                sem lacinia quam venenatis vestibulum. Curabitur blandit tempus porttitor.</p>
 
               <div class="row mt-4">
                 <div class="col-md-6">
@@ -244,7 +275,7 @@
 
               <div class="signature mt-4" data-aos="fade-up" data-aos-delay="250">
                 <p class="chef-name">Jane Smith, Head of Operations</p>
-                <img src="assets/img/misc/signature-1.webp" alt="Chef Signature" class="img-fluid">
+                <img src="{% static 'img/misc/signature-1.webp' %}" alt="Chef Signature" class="img-fluid">
               </div>
             </div>
           </div>
@@ -253,17 +284,20 @@
             <div class="about-gallery">
               <div class="row g-3">
                 <div class="col-6">
-                  <img src="assets/img/restaurant/showcase-3.webp" class="img-fluid rounded" alt="Restaurant Image">
+                  <img src="{% static 'img/restaurant/showcase-3.webp' %}" class="img-fluid rounded"
+                    alt="Restaurant Image">
                 </div>
                 <div class="col-6">
-                  <img src="assets/img/restaurant/showcase-8.webp" class="img-fluid rounded" alt="Restaurant Image">
+                  <img src="{% static 'img/restaurant/showcase-8.webp' %}" class="img-fluid rounded"
+                    alt="Restaurant Image">
                 </div>
                 <div class="col-12 mt-3">
                   <div class="years-badge">
                     <span class="number">18</span>
                     <span class="text">Years of Dedication</span>
                   </div>
-                  <img src="assets/img/restaurant/showcase-6.webp" class="img-fluid rounded" alt="Restaurant Image">
+                  <img src="{% static 'img/restaurant/showcase-6.webp' %}" class="img-fluid rounded"
+                    alt="Restaurant Image">
                 </div>
               </div>
             </div>
@@ -272,17 +306,17 @@
 
       </div>
 
-    </section><!-- /About Section -->
+    </section><!--Fim da Secao Sobre-->
 
-    <!-- Menu Section -->
+    <!-- Secao Menu -->
     <section id="menu" class="menu section">
 
-      <!-- Section Title -->
+      <!-- Titulo do Menu-->
       <div class="container section-title" data-aos="fade-up">
         <span class="description-title">Menu</span>
         <h2>Menu</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+      </div><!--Fim da secao titulo do menu-->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -303,7 +337,7 @@
             <div class="col-xl-4 col-lg-6 isotope-item filter-starters">
               <div class="menu-card">
                 <div class="menu-card-image">
-                  <img src="assets/img/restaurant/starter-1.webp" alt="Appetizer" class="img-fluid">
+                  <img src="{% static 'img/restaurant/starter-1.webp' %}" alt="Appetizer" class="img-fluid">
                   <div class="dietary-badges">
                     <span class="badge-vegetarian">V</span>
                   </div>
@@ -324,7 +358,7 @@
             <div class="col-xl-4 col-lg-6 isotope-item filter-starters">
               <div class="menu-card">
                 <div class="menu-card-image">
-                  <img src="assets/img/restaurant/starter-3.webp" alt="Appetizer" class="img-fluid">
+                  <img src="{% static 'img/restaurant/starter-3.webp' %}" alt="Appetizer" class="img-fluid">
                   <div class="dietary-badges">
                     <span class="badge-seafood">SF</span>
                   </div>
@@ -345,7 +379,7 @@
             <div class="col-xl-4 col-lg-6 isotope-item filter-main">
               <div class="menu-card featured">
                 <div class="menu-card-image">
-                  <img src="assets/img/restaurant/main-2.webp" alt="Main Course" class="img-fluid">
+                  <img src="{% static 'img/restaurant/main-2.webp' %}" alt="Main Course" class="img-fluid">
                   <div class="dietary-badges">
                     <span class="badge-chef">Chef's Choice</span>
                   </div>
@@ -366,7 +400,7 @@
             <div class="col-xl-4 col-lg-6 isotope-item filter-main">
               <div class="menu-card">
                 <div class="menu-card-image">
-                  <img src="assets/img/restaurant/main-6.webp" alt="Main Course" class="img-fluid">
+                  <img src="{% static 'img/restaurant/main-6.webp' %}" alt="Main Course" class="img-fluid">
                   <div class="dietary-badges">
                     <span class="badge-vegetarian">V</span>
                     <span class="badge-gluten-free">GF</span>
@@ -388,7 +422,7 @@
             <div class="col-xl-4 col-lg-6 isotope-item filter-dessert">
               <div class="menu-card">
                 <div class="menu-card-image">
-                  <img src="assets/img/restaurant/dessert-4.webp" alt="Dessert" class="img-fluid">
+                  <img src="{% static 'img/restaurant/dessert-4.webp' %}" alt="Dessert" class="img-fluid">
                   <div class="dietary-badges">
                     <span class="badge-signature">Signature</span>
                   </div>
@@ -409,7 +443,7 @@
             <div class="col-xl-4 col-lg-6 isotope-item filter-dessert">
               <div class="menu-card">
                 <div class="menu-card-image">
-                  <img src="assets/img/restaurant/dessert-9.webp" alt="Dessert" class="img-fluid">
+                  <img src="{% static 'img/restaurant/dessert-9.webp' %}" alt="Dessert" class="img-fluid">
                   <div class="dietary-badges">
                     <span class="badge-vegan">VG</span>
                   </div>
@@ -430,7 +464,7 @@
             <div class="col-xl-4 col-lg-6 isotope-item filter-drinks">
               <div class="menu-card">
                 <div class="menu-card-image">
-                  <img src="assets/img/restaurant/drink-2.webp" alt="Beverage" class="img-fluid">
+                  <img src="{% static 'img/restaurant/drink-2.webp' %}" alt="Beverage" class="img-fluid">
                   <div class="dietary-badges">
                     <span class="badge-alcoholic">21+</span>
                   </div>
@@ -451,7 +485,7 @@
             <div class="col-xl-4 col-lg-6 isotope-item filter-drinks">
               <div class="menu-card">
                 <div class="menu-card-image">
-                  <img src="assets/img/restaurant/drink-6.webp" alt="Beverage" class="img-fluid">
+                  <img src="{% static 'img/restaurant/drink-6.webp' %}" alt="Beverage" class="img-fluid">
                   <div class="dietary-badges">
                     <span class="badge-fresh">Fresh</span>
                   </div>
@@ -500,7 +534,7 @@
             <div class="col-lg-6">
               <div class="recommendation-card">
                 <div class="recommendation-image">
-                  <img src="assets/img/restaurant/main-9.webp" alt="Chef Recommendation" class="img-fluid">
+                  <img src="{% static 'img/restaurant/main-9.webp' %}" alt="Chef Recommendation" class="img-fluid">
                   <div class="chef-badge">
                     <i class="bi bi-award"></i>
                     <span>Chef's Pick</span>
@@ -511,7 +545,8 @@
                     <h4>Pan-Seared Duck Breast</h4>
                     <div class="recommendation-price">$34.50</div>
                   </div>
-                  <p>Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum.</p>
+                  <p>Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum.
+                  </p>
                   <div class="recommendation-details">
                     <div class="serving-info">
                       <i class="bi bi-clock"></i>
@@ -529,7 +564,7 @@
             <div class="col-lg-6">
               <div class="recommendation-card">
                 <div class="recommendation-image">
-                  <img src="assets/img/restaurant/main-8.webp" alt="Chef Recommendation" class="img-fluid">
+                  <img src="{% static 'img/restaurant/main-8.webp' %}" alt="Chef Recommendation" class="img-fluid">
                   <div class="chef-badge">
                     <i class="bi bi-award"></i>
                     <span>Chef's Pick</span>
@@ -617,9 +652,10 @@
                   <i class="bi bi-star-fill"></i>
                   <i class="bi bi-star-fill"></i>
                 </div>
-                <p>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</p>
+                <p>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus.
+                  Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</p>
                 <div class="profile">
-                  <img src="assets/img/person/person-m-9.webp" class="testimonial-img" alt="" loading="lazy">
+                  <img src="{% static 'img/person/person-m-9.webp' %}" class="testimonial-img" alt="" loading="lazy">
                   <div class="info">
                     <h4>Marcus Chen <i class="bi bi-patch-check-fill"></i></h4>
                     <span>@marcuschen</span>
@@ -638,9 +674,10 @@
                   <i class="bi bi-star-fill"></i>
                   <i class="bi bi-star-fill"></i>
                 </div>
-                <p>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</p>
+                <p>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim
+                  tempor labore quem eram duis noster aute amet eram fore quis sint minim.</p>
                 <div class="profile">
-                  <img src="assets/img/person/person-f-5.webp" class="testimonial-img" alt="" loading="lazy">
+                  <img src="{% static 'img/person/person-f-5.webp' %}" class="testimonial-img" alt="" loading="lazy">
                   <div class="info">
                     <h4>Sarah Mitchell <i class="bi bi-patch-check-fill"></i></h4>
                     <span>@sarahmitch</span>
@@ -659,9 +696,10 @@
                   <i class="bi bi-star-fill"></i>
                   <i class="bi bi-star-fill"></i>
                 </div>
-                <p>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore.</p>
+                <p>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit
+                  minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore.</p>
                 <div class="profile">
-                  <img src="assets/img/person/person-f-12.webp" class="testimonial-img" alt="" loading="lazy">
+                  <img src="{% static 'img/person/person-f-12.webp' %}" class="testimonial-img" alt="" loading="lazy">
                   <div class="info">
                     <h4>James Wilson <i class="bi bi-patch-check-fill"></i></h4>
                     <span>@jwilson</span>
@@ -680,9 +718,10 @@
                   <i class="bi bi-star-fill"></i>
                   <i class="bi bi-star-fill"></i>
                 </div>
-                <p>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa.</p>
+                <p>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa
+                  labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa.</p>
                 <div class="profile">
-                  <img src="assets/img/person/person-m-12.webp" class="testimonial-img" alt="" loading="lazy">
+                  <img src="{% static 'img/person/person-m-12.webp' %}" class="testimonial-img" alt="" loading="lazy">
                   <div class="info">
                     <h4>Emma Rodriguez <i class="bi bi-patch-check-fill"></i></h4>
                     <span>@emmarod</span>
@@ -701,9 +740,10 @@
                   <i class="bi bi-star-fill"></i>
                   <i class="bi bi-star-fill"></i>
                 </div>
-                <p>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</p>
+                <p>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis
+                  quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</p>
                 <div class="profile">
-                  <img src="assets/img/person/person-m-13.webp" class="testimonial-img" alt="" loading="lazy">
+                  <img src="{% static 'img/person/person-m-13.webp' %}" class="testimonial-img" alt="" loading="lazy">
                   <div class="info">
                     <h4>David Kumar <i class="bi bi-patch-check-fill"></i></h4>
                     <span>@davidkumar</span>
@@ -722,9 +762,10 @@
                   <i class="bi bi-star-fill"></i>
                   <i class="bi bi-star-fill"></i>
                 </div>
-                <p>Texit tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</p>
+                <p>Texit tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis
+                  quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</p>
                 <div class="profile">
-                  <img src="assets/img/person/person-f-13.webp" class="testimonial-img" alt="" loading="lazy">
+                  <img src="{% static 'img/person/person-f-13.webp' %}" class="testimonial-img" alt="" loading="lazy">
                   <div class="info">
                     <h4>Sophia Lee <i class="bi bi-patch-check-fill"></i></h4>
                     <span>@sophialee</span>
@@ -758,7 +799,7 @@
         <div class="featured-chef row align-items-center g-4" data-aos="fade-up" data-aos-delay="150">
           <div class="col-lg-5">
             <figure class="chef-photo m-0">
-              <img src="assets/img/restaurant/chef-4.webp" alt="Executive chef portrait" class="img-fluid">
+              <img src="{% static 'img/restaurant/chef-4.webp' %}" alt="Executive chef portrait" class="img-fluid">
               <div class="badge-overlay">
                 <span class="pill"><i class="bi bi-star-fill me-1"></i> Michelin Mention</span>
               </div>
@@ -773,7 +814,8 @@
               </div>
               <h3 class="name">Avery Montrose</h3>
               <p class="role mb-3">Executive Chef</p>
-              <p class="bio mb-4">Curabitur convallis lectus a sapien dictum, sed posuere urna fermentum. Maecenas sodales, neque non pretium ultrices, lacus nibh finibus mi, non vulputate arcu quam at nisl.</p>
+              <p class="bio mb-4">Curabitur convallis lectus a sapien dictum, sed posuere urna fermentum. Maecenas
+                sodales, neque non pretium ultrices, lacus nibh finibus mi, non vulputate arcu quam at nisl.</p>
 
               <ul class="awards list-unstyled d-flex flex-wrap gap-2 mb-4">
                 <li class="award-badge"><i class="bi bi-award me-1"></i> Gourmand Trophy 2022</li>
@@ -782,7 +824,7 @@
               </ul>
 
               <div class="signature">
-                <img src="assets/img/misc/signature-1.webp" alt="Chef signature" class="img-fluid">
+                <img src="{% static 'img/misc/signature-1.webp' %}" alt="Chef signature" class="img-fluid">
               </div>
             </div>
           </div>
@@ -793,7 +835,8 @@
           <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
             <article class="chef-card h-100">
               <div class="image-wrapper">
-                <img src="assets/img/restaurant/chef-1.webp" alt="Sous chef portrait" class="img-fluid" loading="lazy">
+                <img src="{% static 'img/restaurant/chef-1.webp' %}" alt="Sous chef portrait" class="img-fluid"
+                  loading="lazy">
                 <ul class="social list-unstyled m-0">
                   <li><a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a></li>
                   <li><a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a></li>
@@ -803,7 +846,8 @@
               <div class="content p-3">
                 <h4 class="name mb-1">Jordan Lee</h4>
                 <p class="role mb-2">Sous Chef</p>
-                <p class="excerpt mb-3">Donec feugiat, arcu non pulvinar posuere, risus libero cursus nibh, sed dictum nibh arcu non augue.</p>
+                <p class="excerpt mb-3">Donec feugiat, arcu non pulvinar posuere, risus libero cursus nibh, sed dictum
+                  nibh arcu non augue.</p>
                 <div class="badges d-flex flex-wrap gap-2">
                   <span class="mini-badge"><i class="bi bi-award me-1"></i> Street Food Fest</span>
                 </div>
@@ -814,7 +858,8 @@
           <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="250">
             <article class="chef-card h-100">
               <div class="image-wrapper">
-                <img src="assets/img/restaurant/chef-6.webp" alt="Pastry chef portrait" class="img-fluid" loading="lazy">
+                <img src="{% static 'img/restaurant/chef-6.webp' %}" alt="Pastry chef portrait" class="img-fluid"
+                  loading="lazy">
                 <ul class="social list-unstyled m-0">
                   <li><a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a></li>
                   <li><a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a></li>
@@ -824,7 +869,8 @@
               <div class="content p-3">
                 <h4 class="name mb-1">Mila Santos</h4>
                 <p class="role mb-2">Pastry Chef</p>
-                <p class="excerpt mb-3">Integer aliquet, urna et commodo gravida, libero lacus aliquam velit, vitae iaculis sem velit in purus.</p>
+                <p class="excerpt mb-3">Integer aliquet, urna et commodo gravida, libero lacus aliquam velit, vitae
+                  iaculis sem velit in purus.</p>
                 <div class="badges d-flex flex-wrap gap-2">
                   <span class="mini-badge"><i class="bi bi-egg-fried me-1"></i> Cocoa Summit</span>
                 </div>
@@ -835,7 +881,8 @@
           <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
             <article class="chef-card h-100">
               <div class="image-wrapper">
-                <img src="assets/img/restaurant/chef-8.webp" alt="Grill chef portrait" class="img-fluid" loading="lazy">
+                <img src="{% static 'img/restaurant/chef-8.webp' %}" alt="Grill chef portrait" class="img-fluid"
+                  loading="lazy">
                 <ul class="social list-unstyled m-0">
                   <li><a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a></li>
                   <li><a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a></li>
@@ -845,7 +892,8 @@
               <div class="content p-3">
                 <h4 class="name mb-1">Kai Thompson</h4>
                 <p class="role mb-2">Grill Master</p>
-                <p class="excerpt mb-3">Pellentesque dapibus, nibh id pharetra interdum, risus est vehicula lectus, non iaculis velit elit ut felis.</p>
+                <p class="excerpt mb-3">Pellentesque dapibus, nibh id pharetra interdum, risus est vehicula lectus, non
+                  iaculis velit elit ut felis.</p>
                 <div class="badges d-flex flex-wrap gap-2">
                   <span class="mini-badge"><i class="bi bi-fire me-1"></i> Smoke-Off Winner</span>
                 </div>
@@ -856,7 +904,8 @@
           <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="350">
             <article class="chef-card h-100">
               <div class="image-wrapper">
-                <img src="assets/img/restaurant/chef-3.webp" alt="Line cook portrait" class="img-fluid" loading="lazy">
+                <img src="{% static 'img/restaurant/chef-3.webp' %}" alt="Line cook portrait" class="img-fluid"
+                  loading="lazy">
                 <ul class="social list-unstyled m-0">
                   <li><a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a></li>
                   <li><a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a></li>
@@ -866,7 +915,8 @@
               <div class="content p-3">
                 <h4 class="name mb-1">Renee Collins</h4>
                 <p class="role mb-2">Line Cook</p>
-                <p class="excerpt mb-3">Vestibulum congue, justo eget ultricies posuere, erat nunc viverra arcu, vitae cursus arcu nunc at erat.</p>
+                <p class="excerpt mb-3">Vestibulum congue, justo eget ultricies posuere, erat nunc viverra arcu, vitae
+                  cursus arcu nunc at erat.</p>
                 <div class="badges d-flex flex-wrap gap-2">
                   <span class="mini-badge"><i class="bi bi-emoji-smile me-1"></i> Guest Favorite</span>
                 </div>
@@ -880,163 +930,191 @@
 
     </section><!-- /Chefs Section -->
 
-    <!-- Book A Table Section -->
+    <!-- RESERVAS-->
+    <div class="form-header text-center">
+      <h3>Fazer Reserva</h3>
+      <p>Preencha os dados abaixo para entrar na nossa lista de espera.</p>
+
+      <!-- Mostrador da fila de espera -->
+      <div class="fila-espera mt-3">
+        <span class="badge bg-warning text-dark fs-6">
+          <i class="bi bi-clock-history me-1"></i>
+          Atualmente há <strong>{{ total_na_fila }}</strong> pessoa{{ total_na_fila|pluralize:"s" }} na fila de espera
+        </span>
+      </div>
+    </div>
+
     <section id="book-a-table" class="book-a-table section light-background">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row">
-          <div class="col-12">
-            <div class="reservation-container">
-              <div class="row g-0">
+        <div class="reservation-container">
+          <div class="row g-0">
 
-                <div class="col-lg-5" data-aos="fade-right" data-aos-delay="200">
-                  <div class="reservation-form-section">
-                    <div class="form-header text-center">
-                      <h3>Make a Reservation</h3>
-                      <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.</p>
-                    </div>
-
-                    <form action="forms/book-a-table.php" method="post" role="form" class="php-email-form">
-                      <div class="row gy-3">
-                        <div class="col-12">
-                          <input type="text" name="name" class="form-control" placeholder="Full Name" required="">
-                        </div>
-                        <div class="col-12">
-                          <input type="email" class="form-control" name="email" placeholder="Email Address" required="">
-                        </div>
-                        <div class="col-12">
-                          <input type="tel" class="form-control" name="phone" placeholder="Phone Number" required="">
-                        </div>
-                        <div class="col-6">
-                          <input type="date" name="date" class="form-control" required="">
-                        </div>
-                        <div class="col-6">
-                          <input type="time" class="form-control" name="time" required="">
-                        </div>
-                        <div class="col-6">
-                          <select name="people" class="form-select" required="">
-                            <option value="">Guests</option>
-                            <option value="1">1 Guest</option>
-                            <option value="2">2 Guests</option>
-                            <option value="3">3 Guests</option>
-                            <option value="4">4 Guests</option>
-                            <option value="5">5 Guests</option>
-                            <option value="6">6+ Guests</option>
-                          </select>
-                        </div>
-                        <div class="col-6">
-                          <select name="occasion" class="form-select">
-                            <option value="">Occasion</option>
-                            <option value="birthday">Birthday</option>
-                            <option value="anniversary">Anniversary</option>
-                            <option value="business">Business Dinner</option>
-                            <option value="date">Date Night</option>
-                            <option value="celebration">Celebration</option>
-                            <option value="other">Other</option>
-                          </select>
-                        </div>
-                        <div class="col-12">
-                          <textarea class="form-control" name="message" rows="3" placeholder="Special requests or dietary requirements"></textarea>
-                        </div>
-                      </div>
-
-                      <div class="my-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your reservation request has been submitted successfully. We'll contact you shortly to confirm.</div>
-                      </div>
-
-                      <button type="submit" class="btn-reserve w-100">
-                        <i class="bi bi-calendar-check me-2"></i>
-                        Reserve Table
-                      </button>
-                    </form>
-                  </div>
+            <!-- Form Column -->
+            <div class="col-lg-5" data-aos="fade-right" data-aos-delay="200">
+              <div class="reservation-form-section">
+                <div class="form-header text-center">
+                  <h3>Make a Reservation</h3>
+                  <p>Fill in the information below to join our waiting list..</p>
                 </div>
 
-                <div class="col-lg-7" data-aos="fade-left" data-aos-delay="300">
-                  <div class="reservation-info-section">
-                    <div class="hero-image">
-                      <img src="assets/img/restaurant/showcase-2.webp" alt="Restaurant dining area" class="img-fluid">
-                      <div class="overlay-content">
-                        <h4>Experience Fine Dining</h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                      </div>
+                <form id="formulario" action="{% url 'salvar_reserva' %}" method="post" role="form">
+                  {% csrf_token %}
+                  <div class="row gy-3">
+                    <!-- Informações Pessoais -->
+                    <div class="col-12">
+                      <input type="text" name="nome" class="form-control" placeholder="Nome e Sobrenome" required
+                        value="">
                     </div>
 
-                    <div class="info-cards">
-                      <div class="row g-3">
-                        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="400">
-                          <div class="info-card">
-                            <div class="card-icon">
-                              <i class="bi bi-clock"></i>
-                            </div>
-                            <div class="card-content">
-                              <h5>Business Hours</h5>
-                              <p>Tuesday - Thursday: 5:00 PM - 10:00 PM<br>
-                                Friday - Saturday: 5:00 PM - 11:00 PM<br>
-                                Sunday: 4:00 PM - 9:00 PM<br>
-                                <em>Closed Mondays</em>
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="450">
-                          <div class="info-card">
-                            <div class="card-icon">
-                              <i class="bi bi-geo-alt-fill"></i>
-                            </div>
-                            <div class="card-content">
-                              <h5>Find Us</h5>
-                              <p>4567 Elm Avenue, Floor 2<br>
-                                Chicago, IL 60614</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="500">
-                          <div class="info-card">
-                            <div class="card-icon">
-                              <i class="bi bi-telephone-fill"></i>
-                            </div>
-                            <div class="card-content">
-                              <h5>Reservations</h5>
-                              <p>+1 (312) 555-9876<br>
-                                <small>Available daily 2:00 PM - 9:00 PM</small>
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="550">
-                          <div class="info-card">
-                            <div class="card-icon">
-                              <i class="bi bi-envelope-fill"></i>
-                            </div>
-                            <div class="card-content">
-                              <h5>Email Us</h5>
-                              <p>reservations@example.com<br>
-                                <small>Response within 24 hours</small>
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    <div class="col-6">
+                      <input type="number" name="idade" class="form-control" placeholder="Idade" required value="">
                     </div>
 
-                    <div class="additional-info" data-aos="fade-up" data-aos-delay="600">
-                      <div class="info-highlight">
-                        <i class="bi bi-star-fill"></i>
-                        <span>Recommended to book 2-3 days in advance for weekend dining</span>
-                      </div>
+                    <div class="col-6">
+                      <input type="tel" class="form-control" name="telefone" placeholder="Telefone" required value="">
+                    </div>
+
+                    <div class="col-12">
+                      <input type="email" class="form-control" name="email" placeholder="Email" required value="">
+                    </div>
+
+                    <!-- Detalhes da Reserva -->
+                    <div class="col-4">
+                      <input type="number" name="convidados" class="form-control" placeholder="Nº de Convidados"
+                        required value="">
+                    </div>
+
+                    <div class="col-4">
+                      <input type="date" class="form-control" name="dia" required value="">
+                    </div>
+
+                    <div class="col-4">
+                      <input type="time" class="form-control" name="horario" required value="">
+                    </div>
+
+                    <!-- Observações -->
+                    <div class="col-12">
+                      <textarea class="form-control" name="solicitacao_especial" rows="3"
+                        placeholder="Pedidos especiais ou restrições alimentares"></textarea>
                     </div>
                   </div>
-                </div>
 
+                  {% if messages %}
+                  <div class="my-3">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+
+
+
+
+
+                  <button type="submit" class="btn-reserve w-100 mt-3">
+                    <i class="bi bi-calendar-check me-2"></i>
+                    Join the Waiting List
+                  </button>
+                </form>
+
+                <!-- Link para ver a lista de espera -->
+                <div class="text-center mt-3">
+                  <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-list-ul me-1"></i>
+                    View Waiting List - Staff Only
+                  </a>
+                </div>
               </div>
             </div>
+
+            <!-- Info Cards Column (mantenha o mesmo conteúdo) -->
+            <div class="col-lg-7" data-aos="fade-left" data-aos-delay="300">
+              <div class="reservation-info-section">
+                <div class="hero-image">
+                  <img src="{% static 'img/restaurant/showcase-2.webp' %}" alt="Restaurant dining area"
+                    class="img-fluid">
+                  <div class="overlay-content">
+                    <h4>Experience Fine Dining</h4>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                      nulla pariatur.</p>
+                  </div>
+                </div>
+
+                <div class="info-cards">
+                  <div class="row g-3">
+                    <div class="col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                      <div class="info-card">
+                        <div class="card-icon">
+                          <i class="bi bi-clock"></i>
+                        </div>
+                        <div class="card-content">
+                          <h5>Opening Hours</h5>
+                          <p>Tuesday - Thursday: 17:00 - 22:00<br>
+                            Friday - Sábado: 17:00 - 23:00<br>
+                            Sunday: 16:00 - 21:00<br>
+                            <em>Closed at Mondays</em>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="zoom-in" data-aos-delay="450">
+                      <div class="info-card">
+                        <div class="card-icon">
+                          <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div class="card-content">
+                          <h5>Location</h5>
+                          <p>4567 Elm Avenue, Floor 2<br>
+                            Chicago, IL 60614</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="zoom-in" data-aos-delay="500">
+                      <div class="info-card">
+                        <div class="card-icon">
+                          <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <div class="card-content">
+                          <h5>Reservations</h5>
+                          <p>+1 (312) 555-9876<br>
+                            <small>Available daily 2 PM - 9 PM</small>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="zoom-in" data-aos-delay="550">
+                      <div class="info-card">
+                        <div class="card-icon">
+                          <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <div class="card-content">
+                          <h5>Email</h5>
+                          <p>reservations@globo.com<br>
+                            <small>Response within 24 hours.</small>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="additional-info" data-aos="fade-up" data-aos-delay="600">
+                  <div class="info-highlight">
+                    <i class="bi bi-star-fill"></i>
+                    <span>We recommend booking 2-3 days in advance for weekends.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -1044,79 +1122,50 @@
 
     </section><!-- /Book A Table Section -->
 
-    <!-- Location Section -->
-    <section id="location" class="location section">
+    <!--Lista Espera-->
+    <div id="lista" class="lista espera">
+      {% if pessoas %}
+      <h3 style="text-align: center; font-size: 18px; margin-bottom: 20px;">Listagem de Pessoas (Por Ordem de Chegada)
+      </h3>
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row g-4">
-          <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
-            <div class="map-container">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.684949335945!2d-73.98658242357565!3d40.75853057126168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ1JzMwLjciTiA3M8KwNTknMDcuNyJX!5e0!3m2!1sen!2sus!4v1654321234567!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-            <div class="info-container">
-              <div class="section-header">
-                <h2>Find Us</h2>
-                <p>Visit Us Today</p>
-              </div>
-
-              <div class="info-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="info-icon">
-                  <i class="bi bi-geo-alt"></i>
-                </div>
-                <div class="info-content">
-                  <h3>Our Location</h3>
-                  <p>123 Culinary Avenue, Manhattan, NY 10001</p>
-                </div>
-              </div>
-
-              <div class="info-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="info-icon">
-                  <i class="bi bi-telephone"></i>
-                </div>
-                <div class="info-content">
-                  <h3>Reservations</h3>
-                  <p>+1 (212) 555-7890</p>
-                  <p class="small-text">We recommend making reservations at least 48 hours in advance</p>
-                </div>
-              </div>
-
-              <div class="info-card" data-aos="fade-up" data-aos-delay="500">
-                <div class="info-icon">
-                  <i class="bi bi-clock"></i>
-                </div>
-                <div class="info-content">
-                  <h3>Hours</h3>
-                  <div class="hours-grid">
-                    <div class="day">Monday - Thursday</div>
-                    <div class="time">11:00 AM - 10:00 PM</div>
-
-                    <div class="day">Friday - Saturday</div>
-                    <div class="time">11:00 AM - 11:30 PM</div>
-
-                    <div class="day">Sunday</div>
-                    <div class="time">10:00 AM - 9:00 PM</div>
-
-                    <div class="day">Brunch Hours</div>
-                    <div class="time">Sat &amp; Sun, 10:00 AM - 2:00 PM</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cta-wrapper" data-aos="fade-up" data-aos-delay="600">
-                <a href="#" class="btn-book">Make a Reservation</a>
-                <a href="#" class="btn-contact">Contact Us</a>
-              </div>
-            </div>
-          </div>
+      <div class="container">
+        <!-- Cabeçalho -->
+        <div class="row"
+          style="text-align: center; font-weight: bold; background-color: #06376b; padding: 10px; border-bottom: 2px solid #dee2e6;">
+          <div class="col-2">Name</div>
+          <div class="col-1">Age</div>
+          <div class="col-2">Phone</div>
+          <div class="col-2">E-mail</div>
+          <div class="col-1">Guests</div>
+          <div class="col-2">Hour</div>
+          <div class="col-2">Actions</div>
         </div>
 
+        <!-- Linhas de dados -->
+        {% for pessoa in pessoas %}
+        <div class="row align-items-center"
+          style="text-align: center; padding: 10px; border-bottom: 1px solid #dee2e6;">
+          <div class="col-2">{{ pessoa.nome }}</div>
+          <div class="col-1">{{ pessoa.idade }}</div>
+          <div class="col-2">{{ pessoa.telefone }}</div>
+          <div class="col-2">{{ pessoa.email }}</div>
+          <div class="col-1">{{ pessoa.convidados }}</div>
+          <div class="col-2">{{ pessoa.horario }}</div>
+          <div class="col-2">
+            <a href="{% url 'editar' pessoa.id %}" class="btn btn-warning btn-sm">EDITAR</a>
+            <a href="{% url 'delete' pessoa.id %}" onclick="return confirm('Confirma a Exclusão?')"
+              class="btn btn-danger btn-sm">APAGAR</a>
+          </div>
+        </div>
+        {% endfor %}
       </div>
-
-    </section><!-- /Location Section -->
+      {% else %}
+      <div style="text-align: center; color: #2d2e2e; margin-top: 20px; padding: 40px;">
+        <!-- Nenhuma pessoa cadastrada na fila de espera.-->
+      </div>
+      {% endif %}
+    </div>
+    <!-- /Lista Espera-->
 
     <!-- Events Section -->
     <section id="events" class="events section light-background">
@@ -1135,7 +1184,8 @@
             <div class="seasonal-hero">
               <span class="seasonal-badge">Limited Time</span>
               <h2>Autumn Harvest Festival</h2>
-              <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+              <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
               <div class="festival-dates">
                 <i class="bi bi-calendar-event"></i>
                 <span>October 15 - November 30, 2024</span>
@@ -1148,7 +1198,7 @@
           <div class="col-lg-6" data-aos="slide-right" data-aos-delay="250">
             <div class="feature-card primary">
               <div class="feature-visual">
-                <img src="assets/img/restaurant/misc-3.webp" alt="Special Menu" class="img-fluid">
+                <img src="{% static 'img/restaurant/misc-3.webp' %}" alt="Special Menu" class="img-fluid">
                 <div class="feature-badge">
                   <i class="bi bi-star-fill"></i>
                   <span>Chef's Special</span>
@@ -1156,7 +1206,8 @@
               </div>
               <div class="feature-content">
                 <h3>Seasonal Harvest Menu</h3>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                  pariatur. Excepteur sint occaecat cupidatat non proident.</p>
                 <div class="feature-highlights">
                   <div class="highlight-item">
                     <i class="bi bi-check-circle-fill"></i>
@@ -1175,7 +1226,7 @@
           <div class="col-lg-6" data-aos="slide-left" data-aos-delay="300">
             <div class="feature-card secondary">
               <div class="feature-visual">
-                <img src="assets/img/restaurant/misc-7.webp" alt="Wine Pairing" class="img-fluid">
+                <img src="{% static 'img/restaurant/misc-7.webp' %}" alt="Wine Pairing" class="img-fluid">
                 <div class="feature-badge">
                   <i class="bi bi-award-fill"></i>
                   <span>Award Winning</span>
@@ -1183,7 +1234,8 @@
               </div>
               <div class="feature-content">
                 <h3>Wine Pairing Experience</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                  totam rem aperiam, eaque ipsa quae ab illo.</p>
                 <div class="feature-highlights">
                   <div class="highlight-item">
                     <i class="bi bi-check-circle-fill"></i>
@@ -1205,7 +1257,8 @@
             <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="250">
               <div class="awards-content">
                 <h3>Recognition &amp; Awards</h3>
-                <p>At enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>At enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.</p>
               </div>
             </div>
             <div class="col-lg-8" data-aos="fade-left" data-aos-delay="300">
@@ -1340,7 +1393,8 @@
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-          <ul class="restaurant-gallery-filters isotope-filters mb-4 justify-content-center d-flex gap-2" data-aos="fade-up" data-aos-delay="100">
+          <ul class="restaurant-gallery-filters isotope-filters mb-4 justify-content-center d-flex gap-2"
+            data-aos="fade-up" data-aos-delay="100">
             <li data-filter="*" class="filter-active">All</li>
             <li data-filter=".filter-food">Food</li>
             <li data-filter=".filter-drinks">Drinks</li>
@@ -1351,8 +1405,9 @@
           <div class="row g-3 isotope-container" data-aos="fade-up" data-aos-delay="200">
             <div class="col-lg-4 col-md-6 isotope-item filter-food">
               <figure class="gallery-card">
-                <a href="assets/img/restaurant/main-3.webp" class="glightbox" data-gallery="restaurant-gallery">
-                  <img src="assets/img/restaurant/main-3.webp" alt="Grilled Salmon" class="img-fluid rounded" loading="lazy">
+                <a href="{% static 'img/restaurant/main-3.webp' %}" class="glightbox" data-gallery="restaurant-gallery">
+                  <img src="{% static 'img/restaurant/main-3.webp' %}" alt="Grilled Salmon" class="img-fluid rounded"
+                    loading="lazy">
                 </a>
                 <figcaption class="caption">
                   <span class="caption-title">Grilled Salmon</span>
@@ -1362,8 +1417,10 @@
             </div>
             <div class="col-lg-4 col-md-6 isotope-item filter-interior">
               <figure class="gallery-card">
-                <a href="assets/img/restaurant/showcase-2.webp" class="glightbox" data-gallery="restaurant-gallery">
-                  <img src="assets/img/restaurant/showcase-2.webp" alt="Dining Hall" class="img-fluid rounded" loading="lazy">
+                <a href="{% static 'img/restaurant/showcase-2.webp' %}" class="glightbox"
+                  data-gallery="restaurant-gallery">
+                  <img src="{% static 'img/restaurant/showcase-2.webp' %}" alt="Dining Hall" class="img-fluid rounded"
+                    loading="lazy">
                 </a>
                 <figcaption class="caption">
                   <span class="caption-title">Dining Hall</span>
@@ -1373,8 +1430,9 @@
             </div>
             <div class="col-lg-4 col-md-6 isotope-item filter-staff">
               <figure class="gallery-card">
-                <a href="assets/img/restaurant/chef-5.webp" class="glightbox" data-gallery="restaurant-gallery">
-                  <img src="assets/img/restaurant/chef-5.webp" alt="Chef Maria" class="img-fluid rounded" loading="lazy">
+                <a href="{% static 'img/restaurant/chef-5.webp' %}" class="glightbox" data-gallery="restaurant-gallery">
+                  <img src="{% static 'img/restaurant/chef-5.webp' %}" alt="Chef Maria" class="img-fluid rounded"
+                    loading="lazy">
                 </a>
                 <figcaption class="caption">
                   <span class="caption-title">Chef Maria</span>
@@ -1384,8 +1442,10 @@
             </div>
             <div class="col-lg-4 col-md-6 isotope-item filter-drinks">
               <figure class="gallery-card">
-                <a href="assets/img/restaurant/drink-2.webp" class="glightbox" data-gallery="restaurant-gallery">
-                  <img src="assets/img/restaurant/drink-2.webp" alt="Signature Mocktail" class="img-fluid rounded" loading="lazy">
+                <a href="{% static 'img/restaurant/drink-2.webp' %}" class="glightbox"
+                  data-gallery="restaurant-gallery">
+                  <img src="{% static 'img/restaurant/drink-2.webp' %}" alt="Signature Mocktail"
+                    class="img-fluid rounded" loading="lazy">
                 </a>
                 <figcaption class="caption">
                   <span class="caption-title">Signature Mocktail</span>
@@ -1395,8 +1455,10 @@
             </div>
             <div class="col-lg-4 col-md-6 isotope-item filter-food">
               <figure class="gallery-card">
-                <a href="assets/img/restaurant/dessert-4.webp" class="glightbox" data-gallery="restaurant-gallery">
-                  <img src="assets/img/restaurant/dessert-4.webp" alt="Raspberry Tart" class="img-fluid rounded" loading="lazy">
+                <a href="{% static 'img/restaurant/dessert-4.webp' %}" class="glightbox"
+                  data-gallery="restaurant-gallery">
+                  <img src="{% static 'img/restaurant/dessert-4.webp' %}" alt="Raspberry Tart" class="img-fluid rounded"
+                    loading="lazy">
                 </a>
                 <figcaption class="caption">
                   <span class="caption-title">Raspberry Tart</span>
@@ -1406,8 +1468,10 @@
             </div>
             <div class="col-lg-4 col-md-6 isotope-item filter-interior">
               <figure class="gallery-card">
-                <a href="assets/img/restaurant/showcase-5.webp" class="glightbox" data-gallery="restaurant-gallery">
-                  <img src="assets/img/restaurant/showcase-5.webp" alt="Bar Area" class="img-fluid rounded" loading="lazy">
+                <a href="{% static 'img/restaurant/showcase-5.webp' %}" class="glightbox"
+                  data-gallery="restaurant-gallery">
+                  <img src="{% static 'img/restaurant/showcase-5.webp' %}" alt="Bar Area" class="img-fluid rounded"
+                    loading="lazy">
                 </a>
                 <figcaption class="caption">
                   <span class="caption-title">Bar Area</span>
@@ -1417,8 +1481,9 @@
             </div>
             <div class="col-lg-4 col-md-6 isotope-item filter-staff">
               <figure class="gallery-card">
-                <a href="assets/img/restaurant/chef-2.webp" class="glightbox" data-gallery="restaurant-gallery">
-                  <img src="assets/img/restaurant/chef-2.webp" alt="Sous Chef Daniel" class="img-fluid rounded" loading="lazy">
+                <a href="{% static 'img/restaurant/chef-2.webp' %}" class="glightbox" data-gallery="restaurant-gallery">
+                  <img src="{% static 'img/restaurant/chef-2.webp' %}" alt="Sous Chef Daniel" class="img-fluid rounded"
+                    loading="lazy">
                 </a>
                 <figcaption class="caption">
                   <span class="caption-title">Sous Chef Daniel</span>
@@ -1428,8 +1493,10 @@
             </div>
             <div class="col-lg-4 col-md-6 isotope-item filter-drinks">
               <figure class="gallery-card">
-                <a href="assets/img/restaurant/drink-8.webp" class="glightbox" data-gallery="restaurant-gallery">
-                  <img src="assets/img/restaurant/drink-8.webp" alt="Classic Espresso" class="img-fluid rounded" loading="lazy">
+                <a href="{% static 'img/restaurant/drink-8.webp' %}" class="glightbox"
+                  data-gallery="restaurant-gallery">
+                  <img src="{% static 'img/restaurant/drink-8.webp' %}" alt="Classic Espresso" class="img-fluid rounded"
+                    loading="lazy">
                 </a>
                 <figcaption class="caption">
                   <span class="caption-title">Classic Espresso</span>
@@ -1439,8 +1506,9 @@
             </div>
             <div class="col-lg-4 col-md-6 isotope-item filter-food">
               <figure class="gallery-card">
-                <a href="assets/img/restaurant/main-7.webp" class="glightbox" data-gallery="restaurant-gallery">
-                  <img src="assets/img/restaurant/main-7.webp" alt="Beef Fillet" class="img-fluid rounded" loading="lazy">
+                <a href="{% static 'img/restaurant/main-7.webp' %}" class="glightbox" data-gallery="restaurant-gallery">
+                  <img src="{% static 'img/restaurant/main-7.webp' %}" alt="Beef Fillet" class="img-fluid rounded"
+                    loading="lazy">
                 </a>
                 <figcaption class="caption">
                   <span class="caption-title">Beef Fillet</span>
@@ -1448,6 +1516,7 @@
                 </figcaption>
               </figure>
             </div>
+            
           </div><!-- End Gallery Items Container -->
 
         </div>
@@ -1489,8 +1558,8 @@
               </div>
               <div class="info-content">
                 <h4>Email Address</h4>
-                <p>info@example.com</p>
-                <p>contact@example.com</p>
+                <p>info@globo.com</p>
+                <p>contact@globo.com</p>
               </div>
             </div>
           </div>
@@ -1513,7 +1582,10 @@
 
       <!-- Google Maps (Full Width) -->
       <div class="map-section" data-aos="fade-up" data-aos-delay="200">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
+          width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
       <!-- Contact Form Section (Overlapping) -->
@@ -1556,7 +1628,8 @@
                     <div class="form-group">
                       <div class="input-with-icon">
                         <i class="bi bi-chat-dots message-icon"></i>
-                        <textarea class="form-control" name="message" placeholder="Write Message..." style="height: 180px" required=""></textarea>
+                        <textarea class="form-control" name="message" placeholder="Write Message..."
+                          style="height: 180px" required=""></textarea>
                       </div>
                     </div>
                   </div>
@@ -1590,9 +1663,10 @@
         <div class="col-lg-4">
           <div class="footer-content">
             <a href="index.html" class="logo d-flex align-items-center mb-4">
-              <span class="sitename">Platia</span>
+              <span class="sitename">Shiraz Kitchen & Wine Restaurant</span>
             </a>
-            <p class="mb-4">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Donec velit neque auctor sit amet aliquam vel ullamcorper sit amet ligula.</p>
+            <p class="mb-4">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
+              Donec velit neque auctor sit amet aliquam vel ullamcorper sit amet ligula.</p>
 
             <div class="newsletter-form">
               <h5>Stay Updated</h5>
@@ -1663,16 +1737,16 @@
                 <i class="bi bi-envelope"></i>
               </div>
               <div class="contact-info">
-                <p>contact@example.com</p>
+                <p>renatto.rfilho@yahoo.com</p>
               </div>
             </div>
 
             <div class="social-links">
               <a href="#"><i class="bi bi-facebook"></i></a>
               <a href="#"><i class="bi bi-twitter-x"></i></a>
-              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="https://www.linkedin.com/in/renato-rosa-santos-filho-44555891"><i class="bi bi-linkedin"></i></a>
               <a href="#"><i class="bi bi-youtube"></i></a>
-              <a href="#"><i class="bi bi-github"></i></a>
+              <a href="https://github.com/RenatoRosa80"><i class="bi bi-github"></i></a>
             </div>
           </div>
         </div>
@@ -1685,7 +1759,9 @@
         <div class="row align-items-center">
           <div class="col-lg-6">
             <div class="copyright">
-              <p>© <span>Copyright</span> <strong class="px-1 sitename">Platia</strong> <span>All Rights Reserved</span></p>
+              <p>© <span>Copyright</span> <strong class="px-1 sitename">Renato Rosa</strong> <span>All Rights
+                  Reserved</span>
+              </p>
             </div>
           </div>
           <div class="col-lg-6">
@@ -1695,10 +1771,6 @@
               <a href="#">Cookie Policy</a>
             </div>
             <div class="credits">
-              <!-- All the links in the footer should remain intact. -->
-              <!-- You can delete the links only if you've purchased the pro version. -->
-              <!-- Licensing information: https://bootstrapmade.com/license/ -->
-              <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
               Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
             </div>
           </div>
@@ -1709,22 +1781,31 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader"></div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <!-- Vendor JS Arquivos -->
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <!-- Javascript Arquivos-->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <script>
+    function limparFormulario() {
+      document.getElementById("formulario").reset();
+    }
+  </script>
+
+
 
 </body>
 

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Mesas - Sistema de Reservas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        .table-primary {
+            background: linear-gradient(135deg, #1e3a8a, #2767cd, #143a69);
+            color: white;
+        }
+
+        .table-primary th {
+            padding: 12px 8px;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .table-primary td {
+            padding: 12px 8px;
+            vertical-align: middle;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Ajustes de responsividade */
+        @media (max-width: 768px) {
+            .table-responsive {
+                font-size: 0.85rem;
+            }
+
+            .btn-group-sm>.btn {
+                padding: 2px 4px;
+                font-size: 0.75rem;
+            }
+        }
+
+        .colunas {
+            background: linear-gradient(135deg, #2d4ba0, #3b82f6, #1e4a8a);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1><i class="bi bi-table me-2"></i>Gerenciar Mesas</h1>
+            <a href="{% url 'adicionar_mesa' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>Nova Mesa
+            </a>
+        </div>
+
+        <!-- Mensagens -->
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- Estatísticas -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">{{ total_mesas }}</h4>
+                        <p class="card-text">Total de Mesas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">{{ mesas_livres }}</h4>
+                        <p class="card-text">Livres</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">{{ mesas_ocupadas }}</h4>
+                        <p class="card-text">Ocupadas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">{{ mesas_reservadas }}</h4>
+                        <p class="card-text">Reservadas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela de Mesas Normalizada -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered border-primary table-hover mb-0">
+                        <thead style="background: rgba(0, 0, 0, 0.3);">
+                            <tr>
+                                <th style="width: 10%;">Número</th>
+                                <th style="width: 15%;">Capacidade</th>
+                                <th style="width: 15%;">Status</th>
+                                <th style="width: 15%;">Localização</th>
+                                <th style="width: 30%;">Observações</th>
+                                <th style="width: 15%;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mesa in mesas %}
+                            <tr class="colunas">
+                                <td><strong>{{ mesa.numero }}</strong></td>
+                                <td>{{ mesa.capacidade }} pessoas</td>
+                                <td>
+                                    <span class="badge status-badge 
+                                        {% if mesa.status == 'livre' %}bg-success
+                                        {% elif mesa.status == 'ocupada' %}bg-warning
+                                        {% elif mesa.status == 'reservada' %}bg-info
+                                        {% elif mesa.status == 'limpeza' %}bg-secondary
+                                        {% else %}bg-secondary{% endif %}">
+                                        {% if mesa.status == 'livre' %}Livre
+                                        {% elif mesa.status == 'ocupada' %}Ocupada
+                                        {% elif mesa.status == 'reservada' %}Reservada
+                                        {% elif mesa.status == 'limpeza' %}Limpeza
+                                        {% else %}{{ mesa.status }}{% endif %}
+                                    </span>
+                                </td>
+                                <td>{{ mesa.localizacao|default:"-" }}</td>
+                                <td>{{ mesa.observacoes|default:"-" }}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{% url 'editar_mesa' mesa.id %}" class="btn btn-warning">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a href="{% url 'excluir_mesa' mesa.id %}" class="btn btn-danger"
+                                            onclick="return confirm('Tem certeza que deseja deletar a mesa {{ mesa.numero }}?')">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                        {% if mesa.status == 'ocupada' %}
+                                        <a href="{% url 'liberar_mesa' mesa.id %}" class="btn btn-success"
+                                            onclick="return confirm('Liberar mesa {{ mesa.numero }} para limpeza?')">
+                                            <i class="bi bi-check-circle"></i>
+                                        </a>
+                                        {% elif mesa.status == 'limpeza' %}
+                                        <a href="{% url 'finalizar_limpeza' mesa.id %}" class="btn btn-info"
+                                            onclick="return confirm('Finalizar limpeza da mesa {{ mesa.numero }}?')">
+                                            <i class="bi bi-check2-all"></i>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center">Nenhuma mesa cadastrada</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

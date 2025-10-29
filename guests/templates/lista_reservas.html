@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Lista de Reservas - Sistema de Reservas{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dia-header {
+        background: linear-gradient(135deg, #30302f, #daa532);
+        color: #cb4848;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
+    .hoje { background: linear-gradient(135deg, #28a745, #20c997); color: white; }
+    .reserva-card { background: #d2b8b8; border: 1px solid #d8c5c5; border-radius: 10px; padding: 1rem; margin-bottom: 0.5rem; transition: all 0.3s ease; }
+    .reserva-card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(227, 142, 142, 0.3); }
+    .status-espera { border-left: 4px solid #b0ada3; }
+    .status-confirmada { border-left: 4px solid #28a745; }
+    .status-cancelada { border-left: 4px solid #dc3545; }
+    .badge-dia { background: #72716e; color: #161515; padding: 0.3rem 0.6rem; border-radius: 20px; font-size: 0.8rem; }
+    .card.bg-dark { background: #b0a4a4 !important; border: 1px solid #eac8c8; }
+    .form-control.bg-dark { background: #a89f9f !important; color: #f5f5f5; border: 1px solid #555; }
+    .form-control.bg-dark:focus { background: #c8c0c0; color: #f5f5f5; border-color: #d4af37; box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25); }
+    .filtro-ativo { background: linear-gradient(135deg, #17a2b8, #138496) !important; color: white !important; }
+    .mesa-badge { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+
+    <!-- Cabeçalho -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1><i class="bi bi-calendar-check me-2"></i>Reservas por Dia</h1>
+                <div>
+                    <a href="{% url 'home' %}" class="btn btn-outline-light"><i class="bi bi-arrow-left me-2"></i>Voltar</a>
+                    <a href="{% url 'gerenciar_mesas' %}" class="btn btn-warning ms-2"><i class="bi bi-table me-2"></i>Gerenciar Mesas</a>
+                </div>
+            </div>
+            {% if data_filtro %}
+            <div class="alert alert-info mt-3">
+                <i class="bi bi-funnel me-2"></i>Mostrando reservas para: <strong>{{ data_filtro|date:'d/m/Y' }}</strong>
+                <a href="{% url 'lista_reservas' %}" class="btn btn-sm btn-outline-info ms-3"><i class="bi bi-x-circle me-1"></i>Remover Filtro</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="data" class="form-label">Filtrar por Data:</label>
+                            <input type="date" name="data" id="data" class="form-control bg-dark text-light" value="{{ data_filtro }}">
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button type="submit" class="btn btn-warning me-2"><i class="bi bi-funnel me-2"></i>Filtrar</button>
+                            {% if data_filtro %}
+                            <a href="{% url 'lista_reservas' %}" class="btn btn-outline-secondary"><i class="bi bi-x-circle me-2"></i>Limpar</a>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white text-center"><div class="card-body"><h5 class="card-title">{{ total_reservas }}</h5><p class="card-text">Total de Reservas</p></div></div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark text-center"><div class="card-body"><h5 class="card-title">{{ reservas_espera }}</h5><p class="card-text">Em Espera</p></div></div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white text-center"><div class="card-body"><h5 class="card-title">{{ reservas_confirmadas }}</h5><p class="card-text">Confirmadas</p></div></div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white text-center"><div class="card-body"><h5 class="card-title">{{ total_convidados }}</h5><p class="card-text">Total Convidados</p></div></div>
+        </div>
+    </div>
+
+    <!-- Mensagens -->
+    {% if messages %}
+    <div class="row mb-4">
+        <div class="col-12">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">{{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Lista de Reservas -->
+    {% if reservas_agrupadas %}
+    {% for grupo in reservas_agrupadas %}
+    <div class="row">
+        <div class="col-12">
+            <div class="dia-header {% if grupo.data == hoje %}hoje{% endif %} {% if data_filtro %}filtro-ativo{% endif %}">
+                <h4 class="mb-0"><i class="bi bi-calendar-date me-2"></i>{{ grupo.data|date:'d/m/Y' }}
+                    {% if grupo.data == hoje %}<span class="badge bg-light text-dark ms-2">HOJE</span>{% endif %}
+                    {% if data_filtro %}<span class="badge bg-info ms-2">FILTRADO</span>{% endif %}
+                    <span class="badge-dia ms-2">{{ grupo.reservas|length }} reserva(s)</span>
+                </h4>
+            </div>
+
+            {% for reserva in grupo.reservas %}
+            <div class="reserva-card status-{{ reserva.status }}">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <strong>{{ reserva.nome }}</strong><br>
+                        <small class="text-muted">{{ reserva.convidados }} convidado(s)</small>
+                        {% if reserva.mesa %}
+                        <br><span class="badge bg-info mesa-badge"><i class="bi bi-table me-1"></i>Mesa {{ reserva.mesa.numero }}</span>
+                        {% else %}
+                        <br><span class="badge bg-secondary mesa-badge"><i class="bi bi-table me-1"></i>Sem mesa</span>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2"><i class="bi bi-clock me-1"></i>{{ reserva.horario|time:'H:i' }}</div>
+                    <div class="col-md-2">
+                        <span class="badge bg-{% if reserva.status == 'confirmada' %}success{% elif reserva.status == 'espera' %}warning{% else %}danger{% endif %}">{{ reserva.get_status_display }}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <small><i class="bi bi-telephone me-1"></i>{{ reserva.telefone }}<br><i class="bi bi-envelope me-1"></i>{{ reserva.email }}</small>
+                    </div>
+                    <div class="col-md-2 text-end">
+                        {% if reserva.status != 'cancelada' %}
+                        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalMesa{{ reserva.id }}"><i class="bi bi-table"></i></button>
+                        {% endif %}
+                        <a href="{% url 'edite' reserva.id %}" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+                        <a href="{% url 'delete' reserva.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta reserva?')"><i class="bi bi-trash"></i></a>
+                    </div>
+                </div>
+                {% if reserva.solicitacao_especial %}
+                <div class="row mt-2"><div class="col-12"><small class="text-muted"><i class="bi bi-chat-text me-1"></i>{{ reserva.solicitacao_especial }}</small></div></div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="text-center py-5">
+        <i class="bi bi-calendar-x display-1 text-muted"></i>
+        <h3 class="text-muted mt-3">{% if data_filtro %}Nenhuma reserva encontrada para esta data{% else %}Nenhuma reserva encontrada{% endif %}</h3>
+        <p class="text-muted">{% if data_filtro %}Não há reservas para <strong>{{ data_filtro|date:'d/m/Y' }}</strong>{% else %}Não há reservas cadastradas no sistema.{% endif %}</p>
+        {% if data_filtro %}<a href="{% url 'lista_reservas' %}" class="btn btn-warning"><i class="bi bi-arrow-left me-2"></i>Ver todas as reservas</a>{% endif %}
+    </div>
+    {% endif %}
+</div>
+
+<!-- Modal de Atribuição de Mesa -->
+{% for grupo in reservas_agrupadas %}
+{% for reserva in grupo.reservas %}
+<div class="modal fade" id="modalMesa{{ reserva.id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title">Atribuir Mesa - {{ reserva.nome }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{% url 'atribuir_mesa_reserva' reserva.id %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Selecionar Mesa:</label>
+                        <select name="mesa_id" class="form-select bg-dark text-light">
+                            <option value="">-- Sem mesa --</option>
+                            {% for mesa in mesas_disponiveis %}
+                            <option value="{{ mesa.id }}" {% if reserva.mesa.id|default_if_none:"" == mesa.id|stringformat:"s" %}selected{% endif %}>
+                                Mesa {{ mesa.numero }} ({{ mesa.capacidade }} pessoas) - {{ mesa.get_status_display }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% if reserva.mesa %}
+                    <div class="alert alert-info">
+                        <small>
+                            Mesa atual: <strong>Mesa {{ reserva.mesa.numero }}</strong><br>
+                            Status: {{ reserva.mesa.get_status_display }}<br>
+                            Capacidade: {{ reserva.mesa.capacidade }} pessoas
+                        </small>
+                    </div>
+                    {% endif %}
+                    <div class="alert alert-warning">
+                        <small><i class="bi bi-info-circle me-1"></i>A reserva será automaticamente confirmada ao atribuir uma mesa.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-warning">Atribuir Mesa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endfor %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const dataInput = document.getElementById('data');
+    if (dataInput) dataInput.focus();
+});
+</script>
+{% endblock %}

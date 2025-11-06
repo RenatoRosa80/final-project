@@ -1,0 +1,38 @@
+{% extends 'pedidos/base_pedidos.html' %}
+{% block title %}Excluir Item{% endblock %}
+
+{% block content %}
+
+<h2>Excluir Item</h2>
+
+<p><strong>Pedido:</strong> #{{ pedido.id }}</p>
+
+<p><strong>Item:</strong>
+    {% if item.item_cardapio %}
+        {{ item.item_cardapio.nome }}
+    {% else %}
+        {{ item.produto.nome }}
+    {% endif %}
+</p>
+
+<p><strong>Quantidade:</strong> {{ item.quantidade }}</p>
+
+<hr>
+
+<p class="text-danger fw-bold">
+    Tem certeza que deseja excluir este item do pedido?
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">
+        ✅ Confirmar Exclusão
+    </button>
+
+    <a href="{% url 'pedidos:detalhes_pedido' pedido.id %}"
+       class="btn btn-secondary">
+       Cancelar
+    </a>
+</form>
+
+{% endblock %}

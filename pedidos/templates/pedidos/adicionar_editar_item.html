@@ -1,0 +1,14 @@
+{% extends 'pedidos/base_pedidos.html' %}
+{% block title %}Editar Item{% endblock %}
+
+{% block content %}
+<h2>Editar Item</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="{% url 'pedidos:detalhes_pedido' item.pedido.id %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

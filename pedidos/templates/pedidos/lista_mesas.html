@@ -1,0 +1,69 @@
+{% extends 'pedidos/base_pedidos.html' %}
+{% block title %}Mesas{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Mesas</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Número</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for mesa in mesas %}
+        <tr>
+            <td>{{ mesa.numero }}</td>
+
+            <!-- ✅ STATUS CORRETO COM BASE NO APP GUESTS -->
+            <td>
+                {% if mesa.status == 'ocupada' %}
+                    <span class="badge bg-danger">Ocupada</span>
+
+                {% elif mesa.status == 'livre' %}
+                    <span class="badge bg-success">Livre</span>
+
+                {% elif mesa.status == 'reservada' %}
+                    <span class="badge bg-info text-dark">Reservada</span>
+
+                {% elif mesa.status == 'limpeza' %}
+                    <span class="badge bg-secondary">Em Limpeza</span>
+
+                {% else %}
+                    <span class="badge bg-dark">{{ mesa.status }}</span>
+
+                {% endif %}
+            </td>
+
+            <!-- ✅ AÇÕES -->
+            <td>
+
+                {% if mesa.status == 'livre' %}
+                <!-- ✅ Só permite criar pedido se a mesa estiver livre -->
+                <a href="{% url 'pedidos:criar_pedido' %}?mesa={{ mesa.id }}" 
+                   class="btn btn-primary btn-sm">
+                    Criar Pedido
+                </a>
+
+                {% else %}
+                <!-- ✅ Mesa ocupada, reservada ou limpeza: botão bloqueado -->
+                <button class="btn btn-secondary btn-sm" disabled>
+                    Indisponível
+                </button>
+                {% endif %}
+
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="3" class="text-center">Nenhuma mesa cadastrada.</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}

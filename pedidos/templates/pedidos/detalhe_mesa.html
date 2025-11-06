@@ -1,0 +1,38 @@
+{% extends 'pedidos/base_pedidos.html' %}
+{% block title %}Mesa {{ mesa.numero }}{% endblock %}
+
+{% block content %}
+<h2>Mesa {{ mesa.numero }}</h2>
+<p>Status: {{ mesa.status }}</p>
+
+<h3>Pedidos da Mesa</h3>
+<a href="{% url 'adicionar_pedido' mesa.id %}" class="btn btn-primary mb-3">Adicionar Pedido</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID Pedido</th>
+            <th>Cliente</th>
+            <th>Total</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in mesa.pedidos.all %}
+        <tr>
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.cliente }}</td>
+            <td>{{ pedido.total }}</td>
+            <td>
+                <a href="{% url 'detalhe_pedido' pedido.id %}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{% url 'editar_pedido' pedido.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'deletar_pedido' pedido.id %}" class="btn btn-danger btn-sm">Deletar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Nenhum pedido registrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

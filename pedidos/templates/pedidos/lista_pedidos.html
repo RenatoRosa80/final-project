@@ -1,0 +1,79 @@
+{% extends 'pedidos/base_pedidos.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>{{ titulo }}</h2>
+
+        <div>
+            <a href="{% url 'pedidos:lista_pedidos_abertos' %}" class="btn btn-outline-primary {% if tipo_lista == 'abertos' %}active{% endif %} me-2">
+                Pedidos Abertos
+            </a>
+            <a href="{% url 'pedidos:lista_pedidos_finalizados' %}" class="btn btn-outline-secondary {% if tipo_lista == 'finalizados' %}active{% endif %}">
+                Histórico Finalizados
+            </a>
+            <a href="{% url 'gerenciar_mesas' %}" class="btn btn-success">Voltar</a>
+        </div>
+    </div>
+
+    <table class="table table-hover align-middle shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Mesa</th>
+                <th>Cliente</th>
+                <th>Total (R$)</th>
+                <th>Status</th>
+                <th>Aberto em</th>
+                {% if tipo_lista == 'finalizados' %}
+                <th>Fechado em</th>
+                {% endif %}
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+            <tr>
+                <td><strong>#{{ pedido.id }}</strong></td>
+                <td>Mesa {{ pedido.mesa.numero }}</td>
+                <td>{{ pedido.cliente|default:"—" }}</td>
+                <td>{{ pedido.valor_total|floatformat:2 }}</td>
+                <td>
+                    {% if pedido.aberto %}
+                        <span class="badge bg-success">Aberto</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Finalizado</span>
+                    {% endif %}
+                </td>
+                <td>{{ pedido.data_abertura|date:"d/m/Y H:i" }}</td>
+                {% if tipo_lista == 'finalizados' %}
+                <td>{{ pedido.data_fechamento|date:"d/m/Y H:i" }}</td>
+                {% endif %}
+                <td>
+                    <a href="{% url 'pedidos:detalhes_pedido' pedido.id %}" class="btn btn-info btn-sm">
+                        <i class="bi bi-eye"></i> Ver
+                    </a>
+
+                    {% if tipo_lista == 'abertos' %}
+                        <a href="{% url 'pedidos:fechar_pedido' pedido.id %}" class="btn btn-success btn-sm">
+                            <i class="bi bi-check2-circle"></i> Fechar
+                        </a>
+                    {% else %}
+                        <a href="#" class="btn btn-outline-secondary btn-sm disabled">
+                            <i class="bi bi-lock"></i> Fechado
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center py-4">
+                    <em>Nenhum pedido encontrado.</em>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

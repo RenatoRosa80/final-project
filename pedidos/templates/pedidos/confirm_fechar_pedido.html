@@ -1,0 +1,27 @@
+{% extends 'pedidos/base_pedidos.html' %}
+{% block title %}Fechar Pedido {{ pedido.id }}{% endblock %}
+
+{% block content %}
+
+<h2>Fechar Pedido #{{ pedido.id }}</h2>
+
+<p><strong>Mesa:</strong> {{ pedido.mesa.numero }}</p>
+<p><strong>Total a pagar:</strong> R$ {{ total }}</p>
+
+<hr>
+
+<p>Tem certeza que deseja fechar este pedido?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">
+        ✅ Confirmar Fechamento
+    </button>
+
+    <a href="{% url 'pedidos:detalhes_pedido' pedido.id %}" 
+       class="btn btn-secondary">
+        Cancelar
+    </a>
+</form>
+
+{% endblock %}

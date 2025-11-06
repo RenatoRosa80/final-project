@@ -1,0 +1,68 @@
+{% extends "pedidos/base_pedidos.html" %}
+{% block title %}Cardápio{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Cardápio – Secos & Molhados</h2>
+
+<!-- =================== MESAS DISPONÍVEIS =================== -->
+<h4 class="mb-3">Selecione uma mesa para fazer seu pedido:</h4>
+
+<div class="row mb-4">
+    {% for mesa in mesas %}
+    <div class="col-md-3">
+        <div class="card shadow-sm mb-3">
+            <div class="card-body text-center">
+                <h5>Mesa {{ mesa.numero }}</h5>
+
+                {% if mesa.ocupada %}
+                <button class="btn btn-secondary btn-sm w-100" disabled>Ocupada</button>
+                {% else %}
+                <a href="{% url 'pedidos:criar_pedido_cliente' mesa.id %}"
+                   class="btn btn-success btn-sm w-100">Selecionar Mesa</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% empty %}
+    <p class="text-muted">Nenhuma mesa disponível agora.</p>
+    {% endfor %}
+</div>
+
+<hr class="my-4">
+
+<!-- =================== CARDÁPIO =================== -->
+<h3 class="mb-3">Itens do Cardápio</h3>
+
+{% for categoria in categorias %}
+    <div class="mt-4">
+        <h4 class="border-bottom pb-1">{{ categoria.nome }}</h4>
+
+        <div class="row">
+            {% for item in categoria.itens.all %}
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-3">
+                    
+                    {% if item.imagem %}
+                    <img src="{{ item.imagem.url }}" class="card-img-top" alt="{{ item.nome }}">
+                    {% else %}
+                    <img src="https://via.placeholder.com/300x200?text=Sem+Imagem" 
+                         class="card-img-top" alt="Sem imagem">
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.nome }}</h5>
+                        <p class="card-text">{{ item.descricao|default:"Item do cardápio" }}</p>
+                        <p><strong>R$ {{ item.preco }}</strong></p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted">Nenhum item nesta categoria.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

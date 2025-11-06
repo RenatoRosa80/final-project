@@ -14,8 +14,7 @@ SECRET_KEY = 'django-insecure-zvl3=t&gq9$=$i*yj^tu+l@a4sgr^zy!bt_42(i0@4ae(c27v+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['projeto-final-5ifu.onrender.com', 'localhost', '127.0.0.1']
-
+ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -25,7 +24,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'guests'
+    'guests',
+    'financeiro',
+    'estoque',
+    'pedidos',
+
 ]
 
 MIDDLEWARE = [

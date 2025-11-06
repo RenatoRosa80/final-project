@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Novo Item de Estoque{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Adicionar Item ao Estoque</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="{% url 'lista_estoque' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

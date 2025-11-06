@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Novo Pagamento{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Adicionar Pagamento</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="{% url 'financeiro:lista_pagamentos' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

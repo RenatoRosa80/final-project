@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h1 class="mb-4">Dashboard do Estoque</h1>
+
+    <!-- ======= Estatísticas gerais ======= -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Total de Produtos</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_produtos }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-header">Total de Categorias</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_categorias }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Entradas</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ entradas }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-header">Saídas</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ saidas }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Produtos com estoque baixo ======= -->
+    <div class="mb-4">
+        <h3>Produtos com Estoque Baixo</h3>
+        {% if estoque_baixo %}
+            <ul class="list-group">
+                {% for produto in estoque_baixo %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ produto.nome }} ({{ produto.quantidade }})
+                        <span class="badge bg-warning text-dark">{{ produto.categoria.nome }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhum produto com estoque baixo.</p>
+        {% endif %}
+    </div>
+
+    <!-- ======= Produtos por categoria ======= -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <h4>Bebidas</h4>
+            {% if bebidas %}
+                <ul class="list-group">
+                    {% for produto in bebidas %}
+                        <li class="list-group-item">{{ produto.nome }} ({{ produto.quantidade }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum produto cadastrado.</p>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <h4>Secos</h4>
+            {% if secos %}
+                <ul class="list-group">
+                    {% for produto in secos %}
+                        <li class="list-group-item">{{ produto.nome }} ({{ produto.quantidade }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum produto cadastrado.</p>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <h4>Molhados</h4>
+            {% if molhados %}
+                <ul class="list-group">
+                    {% for produto in molhados %}
+                        <li class="list-group-item">{{ produto.nome }} ({{ produto.quantidade }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum produto cadastrado.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- ======= Últimas movimentações ======= -->
+    <div class="mb-4">
+        <h3>Últimas Movimentações</h3>
+        {% if ultimas_movimentacoes %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Tipo</th>
+                        <th>Quantidade</th>
+                        <th>Data</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mov in ultimas_movimentacoes %}
+                        <tr>
+                            <td>{{ mov.item.nome }}</td>
+                            <td>{{ mov.get_tipo_display }}</td>
+                            <td>{{ mov.quantidade }}</td>
+                            <td>{{ mov.data|date:"d/m/Y H:i" }}</td>
+                            <td>{{ mov.observacao }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Nenhuma movimentação registrada.</p>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

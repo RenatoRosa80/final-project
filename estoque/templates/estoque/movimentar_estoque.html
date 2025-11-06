@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Movimentar Estoque{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4 text-center">Movimentar Estoque - {{ item.nome }}</h2>
+    <form method="post" class="card p-4 shadow-sm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Registrar</button>
+        <a href="{% url 'estoque:lista_itens' %}" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>
+{% endblock %}

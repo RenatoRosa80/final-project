@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Nova Conta{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">{% if conta %}Editar Conta{% else %}Nova Conta{% endif %}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Descrição</label>
+        <input type="text" name="descricao" value="{{ conta.descricao|default:'' }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Valor</label>
+        <input type="number" name="valor" step="0.01" value="{{ conta.valor|default:'' }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Data de Vencimento</label>
+        <input type="date" name="data_vencimento" value="{{ conta.data_vencimento|date:'Y-m-d' }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Categoria</label>
+        <input type="text" name="categoria" value="{{ conta.categoria|default:'' }}" class="form-control">
+    </div>
+    <div class="form-check mb-3">
+        <input type="checkbox" name="paga" id="paga" {% if conta.paga %}checked{% endif %}>
+        <label for="paga">Conta Paga</label>
+    </div>
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a href="{% url 'lista_contas' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

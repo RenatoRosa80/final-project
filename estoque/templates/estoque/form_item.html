@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4 text-center">{{ titulo }}</h2>
+    <form method="post" class="card p-4 shadow-sm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Salvar</button>
+        <a href="{% url 'estoque:lista_itens' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

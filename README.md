@@ -177,28 +177,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # final-project Important Notes
 Senac Final Project
 
@@ -207,3 +185,18 @@ Templates:
 https://bootstrapmade.com/demo/Platia/ - usando esse
 https://bootstrapmade.com/
 https://startbootstrap.com/
+
+Links:
+
+http://127.0.0.1:8000/estoque/movimentacoes/
+
+http://127.0.0.1:8000/estoque/
+
+http://127.0.0.1:8000/pedidos/pedidos/abertos/
+
+http://127.0.0.1:8000/mesas/
+http://127.0.0.1:8000/pedidos/mesas/
+
+http://127.0.0.1:8000/reservas/
+
+http://127.0.0.1:8000/pedidos/cardapio/

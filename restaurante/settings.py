@@ -15,13 +15,13 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # ✅ Inclua o domínio do Render
 ALLOWED_HOSTS = [
-    'final-project-5n9w.onrender.com',   # seu domínio correto
+    'final-project-5n9w.onrender.com',
     '.onrender.com',
     'localhost',
     '127.0.0.1',
 ]
 
-# ✅ Adicione CSRF_TRUSTED_ORIGINS — ESSENCIAL no Render!
+# ✅ Obrigatório para Render (HTTPS e CSRF)
 CSRF_TRUSTED_ORIGINS = [
     'https://final-project-5n9w.onrender.com',
 ]
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # 👈 Adicione esta linha
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -72,7 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'restaurante.wsgi.application'
 
-# Banco de dados — SQLite apenas para testes
+# Banco de dados (SQLite para testes)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -99,6 +100,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# ✅ Adiciona WhiteNoise para servir arquivos estáticos em produção
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Arquivos de mídia
 MEDIA_URL = '/media/'
@@ -111,10 +117,10 @@ LOGIN_REDIRECT_URL = '/reservas/'
 LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = '/'
 
-# ⚙️ Configurações de segurança recomendadas para Render
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# ⚙️ Segurança (ativada apenas quando DEBUG=False)
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_SSL_REDIRECT = True  # força HTTPS
 X_FRAME_OPTIONS = 'DENY'
